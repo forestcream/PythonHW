@@ -1,0 +1,25 @@
+def merge(first, second):
+    result = [0] * (len(first)+len(second))
+    pA = 0
+    pB = 0
+    pC = 0
+    
+    while pA != len(first) and pB != len(second):
+        if first[pA] < second[pB]:
+            result[pC] =  first[pA]
+            pC += 1
+            pA += 1
+        else:
+            result[pC] = second[pB]
+            pC += 1
+            pB += 1
+        while pA != len(first):
+            result[pC] = first[pA]
+            pC += 1
+            pA += 1
+        while pB != len(second):
+            result[pC] = second[pB]
+            pC += 1
+            pB += 1
+            
+    return result
