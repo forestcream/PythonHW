@@ -1,6 +1,10 @@
 # Arrays
 
++ [Compress string](#compress-string)
 
++ [Merge two sorted arrays](#merge-two-sorted-arrays)
+
++ [Diagonal sum of matrix]](#diagonal-sum of-matrix)
 ## Compress string
 
 ```python
