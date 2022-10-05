@@ -1,0 +1,8 @@
+#Find sum of dioganal elements in matrix 
+def diagonalSum(mat):
+    sum = 0
+    for i in range(0, len(mat)):
+        for j in range(0, len(mat)):
+            if (i==j) or(i==len(mat)-j):
+                sum = sum + mat[i][j]
+    return sum
