@@ -1,3 +1,4 @@
+INPUT_CODE_DELIMITER = '# ---end----'
 def read_data(file_name):
     file = open(file_name)
     content = file.read()
@@ -16,7 +17,7 @@ def main():
 
     content = read_data('diagonal_sum.py')
 
-    content = content.split('# ---end---')
+    content = content.split(INPUT_CODE_DELIMITER)
     title = description = None
 
     for line in content[0].split('\n'):
