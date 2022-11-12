@@ -1,0 +1,40 @@
+import math
+from math import sqrt
+
+def __init__ (self, real, imag=0.0):
+    self.real = real
+    self.imag = imag
+    
+    
+def __add__(self, other):
+    return Complex(self.real + other.real, self.imag + other.imag)
+
+def __sub__(self, other):
+    return Complex(self.real - other.real, self.imag - other.image)
+    
+def __mul__(self, other):
+    return Complex(self.real * other.real - self.imag * other.imag, self.imag* other.real + self.real * other.real)
+    
+def __truediv__(self, other):
+    divisor = (other.real**2 + other.imag**2)
+    return Complex((self.real * other.real) -
+        (self.imag * other.imag)/divisor,
+        (self.imag * other.real) + (self.real * other.imag)/divisor)
+        
+def __abs__(self):
+    new = (self.real**2 + (self.imag**2)*-1)
+    return Complex(sqrt(new.real))
+
+
+
+i = complex(2, 10j)
+k = complex(3, 5j)
+add = i + k
+abs(i)
+print(add)
+
+
+subtract = i - k
+multiply = i * k
+
+divide = i / k
