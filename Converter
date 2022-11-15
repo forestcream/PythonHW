@@ -1,3 +1,5 @@
+#First convertor
+
 INPUT_CODE_DELIMITER = '# ---end----'
 
 def read_data(file_name):
