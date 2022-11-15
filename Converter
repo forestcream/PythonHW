@@ -1,16 +1,16 @@
 INPUT_CODE_DELIMITER = '# ---end----'
 
 def read_data(file_name):
-    file = open(file_name)
-    content = file.read()
-    file.close()
+    self = open(file_name)
+    content = self.read()
+    self.close()
     return content
 
 
 def write_data(file_name, data):
-    file = open(file_name, 'w')
+    self = open(file_name, 'w')
     content = "\n".join(data)   
-    file.write(content)
+    self.write(content)
     final_file.close()    
 
 

@@ -6,42 +6,30 @@
 # ->//
 # output.json
 #
-def read_data_to_list(file_name):
-    file = open(file_name)
-    content = file.readlines()
-    file.close()
-    return content
+import csv
+import json
 
 
-def write_data(file_name, data):
-    file = open(file_name, 'w')
-    file.write(data)
-    file.close()
+def make_json(csvFilePath, jsonFilePath):
+    data = []
+
+    with open(csvFilePath, encoding='utf-8') as csvf:
+        csvReader = csv.DictReader(csvf)
 
 
-def prepare_data(data):
-    title = data.pop(0).strip().split(',')
-    return title, data
+        for row in csvReader:
 
-def convert_row_to_json(keys, row):
-    values = row.strip().split(',')
-    dict(zip(title, values))
-
-    print("""""{"name":{},
-                "id":{},
-                "birth":{},
-                "salary":{},
-                "department":{}
-                }""".format(*values))
-
-def convert_csv_to_json(data):
-    title, data = prepare_data(data)
-    result = [convert_row_to_json(title, row) for row in data]
-
-def main():
-    conv = Converter()
-    conv.readInput()
+            data.append(row)
 
 
-if __name__ == "__main__":
-    main()
+    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
+        jsonString = json.dumps(data, indent=4)
+        jsonf.write(jsonString)
+
+
+
+csvFilePath = r'input.csv'
+jsonFilePath = r'output.json'
+
+
+make_json(csvFilePath, jsonFilePath)
