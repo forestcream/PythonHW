@@ -1,34 +1,25 @@
 import unittest
-from manual import ManualCsvConverter
+
 
 
 class MyTests(unittest.TestCase):
 
-    def setUp(self):
-        self.manual = ManualCsvConverter()
-
-    def test_prepare_title(self):
-        self.assertEqual(self.manual.prepare_title({"id,name,birth,salary,department"}),
-                         {"id", "name", "birth", "salary", "department"})
+    def test_convert(self):
+        test1 = CsvToJsonConverter(['id,name\n','1,Ivan'])
+        expected = [{ 'id':'1','name':'Ivan'}]
+        self.assertEqual(test1.convert(), expected)
 
 
-    def test_convert_row_to_json(self):
-        self.assertEqual(self.manual.convert_row_to_json("1,Ivan,1980,150000,1"), )
+    def test_convert(self):
+        test2 = CsvToJsonConverter(['id\n','1'])
+        expected = ['id':'1']
+        self.assertEqual(test2.convert(), expected)
 
-        
-    def test_to_json(self):
-        self.assertEqual(self.manual.to_json("id,name,birth,salary,department"
-                                             "1,Ivan,1980,150000,1"
-                                             "2,Alex,1960,200000,5"){"id" : "1",
-                                                                             "name": "Ivan",
-                                                                     "birth" : "1980",
-                                                                     "salary" : "150000",
-                                                                     "department" : "1"},
-                                                                    {"id" : "2",
-                                                                             "name": "Alex",
-                                                                     "birth" : "1960",
-                                                                     "salary" : "200000",
-                                                                     "department" : "5"})
+
+    def test_convert(self):
+        test3 = CsvToJsonConverter(['id, name, salary, birth\n','1, Ivan,,1999\n','2, AAA bbb, 100000, '])
+        expected = '[{ "id":"1", "name":"Ivan",  "salary":"", "birth":"1999" },{  "id":"2", "name":"AAA bbb",  "salary":"100000", "birth":""}]'
+        self.assertEqual(test3.convert(), expected)
 
 
 if __name__ == "__main__":
