@@ -54,10 +54,10 @@ def prepare_data(deal):
         return None
 
     deal_titles = {
-        "BANK": int(bank[0][6:]),
-        "Вход": float(entry[0][6:]),
-        "Таргет": list(map(float, targets[0][8:].split(';'))),
-        "Выход": float(close[0][7:])
+        "bank": int(bank[0][6:]),
+        "entry": float(entry[0][6:]),
+        "targets": list(map(float, targets[0][8:].split(';'))),
+        "close": float(close[0][7:])
     }
     return deal_titles
 
@@ -69,9 +69,10 @@ def main():
     result = []
     for raw_deal in content:
         deal_dict = prepare_data(raw_deal)
+        
         if deal_dict is not None:
             result.append(
-                StrategyDeal(deal_dict["BANK"], deal_dict["Вход"], deal_dict["Таргет"], deal_dict["Выход"])
+                StrategyDeal(**deal_dict)
             )
 
     write_data('out.txt', result)
