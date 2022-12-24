@@ -1,0 +1,76 @@
+import re
+
+
+class StrategyDeal:
+    def __init__(self, bank, entry, targets, close):
+        self.bank = bank
+        self.entry = entry
+        self.targets = targets
+        self.close = close
+
+    def get_targets(self):
+        return self.targets
+
+    def get_target_percents(self):
+        for i in range(len(self.targets)):
+            per = round(self.targets[i] / self.entry, 3)
+        return per
+
+    def get_target_banks(self):
+        for i in range(len(self.targets)):
+            bank = round(self.bank * per[i], 3)
+        return bank
+
+    def __str__(self):
+        return f'BANK: ({self.bank})'
+
+
+def read_data(file_name):
+    self = open(file_name)
+    content = self.readlines()
+    self.close()
+    return content
+
+
+def write_data(file_name, data):
+    self = open(file_name, 'w')
+    content = "".join(data)
+    self.write(content)
+    self.close()
+
+
+def main():
+    content = read_data('deals.txt')
+
+    deal = StrategyDeal(None, None, None, None)
+    for line in content:
+
+        if line != "-----":
+
+            line = line.strip()
+            if 'BANK: ' in line:
+                line = line.replace('BANK: ', '')
+                bank = int(line)
+                deal.bank = bank
+
+            if 'Вход: ' in line:
+                line = line.replace('Вход: ', '')
+                entry = float(line)
+                deal.entry = entry
+
+            if 'Таргет: ' in line:
+                line = line.replace('Таргет: ', '')
+                targets = list(map(float, line.split(';')))
+                deal.entry = targets
+
+            if 'Выход: ' in line:
+                line = line.replace('Выход: ', '')
+                close = float(line)
+                deal.close = close
+
+    result = content
+    write_data('out.txt', result)
+
+
+if __name__ == '__main__':
+    main()
